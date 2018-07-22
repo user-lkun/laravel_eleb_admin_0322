@@ -179,6 +179,11 @@ return [
 
         \Mews\Captcha\CaptchaServiceProvider::class,
 
+        \Overtrue\LaravelUEditor\UEditorServiceProvider::class,
+//        Overtrue\LaravelUEditor\UEditorServiceProvider::class,
+
+        \Jacobcyl\AliOSS\AliOssServiceProvider::class,
+
     ],
 
     /*

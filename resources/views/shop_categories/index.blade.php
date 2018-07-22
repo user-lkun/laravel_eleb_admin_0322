@@ -15,7 +15,7 @@
             <tr>
                 <td>{{$val->id}}</td>
                 <td>{{$val->name}}</td>
-                <td><img src="{{\Illuminate\Support\Facades\Storage::url($val->img)}}" alt="" width="100px"></td>
+                <td><img src="{{$val->img}}" alt="" width="100px"></td>
                 <td>{{$val->status==1?'显示':'隐藏'}}</td>
                 <td>{{$val->created_at}}</td>
                 <td>

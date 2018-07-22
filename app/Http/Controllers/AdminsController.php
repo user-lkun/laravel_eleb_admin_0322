@@ -83,7 +83,7 @@ class AdminsController extends Controller
 //            'password' => 'required|min:6',
 //            'repassword' => 'required',
 
-            'email' => 'required|unique:users,email,'.$old_email.',email',
+            'email' => 'required|unique:shop_users,email,'.$old_email.',email',
 
             'captcha' => 'required|captcha',
 

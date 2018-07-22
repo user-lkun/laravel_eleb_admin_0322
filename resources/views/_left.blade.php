@@ -48,7 +48,17 @@
                     <li><a href="{{ route('shopusers.create') }}">添加商家</a></li>
                 </ul>
             </div>
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    活动管理
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
 
+                    <li><a href="{{ route('activies.index') }}">活动列表</a></li>
+                    <li><a href="{{route('activies.create')}}">添加活动</a></li>
+                </ul>
+            </div>
 
             <div class="btn-group" role="group">
                 <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

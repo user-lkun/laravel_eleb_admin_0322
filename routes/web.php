@@ -34,3 +34,16 @@ Route::post('login', 'SessionsController@store')->name('login');
 //退出
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 
+//平台活动
+Route::resource('activies','ActiviesController');
+
+//接受文件上传
+Route::post('upload',function (){
+    $storage = \Illuminate\Support\Facades\Storage::disk('oss');
+    $fileName =  $storage->putFile('shop_cate_img', request()->file('file'));
+    return [
+        'fileName'=>$storage->url($fileName)
+    ];
+})->name('upload');
+
+

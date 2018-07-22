@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop_categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Shop_categoriesController extends Controller
 {
@@ -36,8 +37,8 @@ class Shop_categoriesController extends Controller
         $status = $request->status;
         $img = $request->img;
         //保存文件
-        $img_name = $img->store('public/img');
-        Shop_categories::create(['name'=>$name,'img'=>$img_name,'status'=>$status]);
+       // $img_name = $img->store('public/img');
+        Shop_categories::create(['name'=>$name,'img'=>$img,'status'=>$status]);
         session()->flash('success','添加成功');
         return redirect('shop_categories');
     }
@@ -57,19 +58,19 @@ class Shop_categoriesController extends Controller
         //修改成功后保存
         $file = $request->img;
 
-        if ($file==null){//没上传头像
+        if ($file==null){//没上传分类图片
             $shop_category->update([
                 'name'=>$request->name,
                 'status'=>$request->status,
 
             ]);
-        }else{//上传了头像
+        }else{//上传了分类图片
             //保存文件
-            $head_name = $file->store('public/logo');
+            //$head_name = $file->store('public/logo');
             $shop_category->update([
                 'name'=>$request->name,
                 'status'=>$request->status,
-                'img'=>$head_name,
+                'img'=>$request->img,
             ]);
         }
 
@@ -79,19 +80,18 @@ class Shop_categoriesController extends Controller
     //删除
     public function destroy(Shop_categories $shop_category){
 
-//        $id = $shop_category->id;
+        $id = $shop_category->id;
+        $res = DB::table('shops')->where('shop_category_id',$id)->count();
 //        $res = DB::select("select title from articles WHERE cate_id='{$id}'");
-
-//        if ($res==null){//判断文章类中是否存在文章,不存在就删除
-//            $category->delete();
-//            session()->flash('success','删除成功');
-//            return redirect("/admin/categorys");
-//        }
-        $shop_category->delete();
-        session()->flash('success','删除成功');
-//        session()->flash('warning','该类下面存在文章,不能被删除!');
-        return redirect("shop_categories");
-
+//        dd($res);
+        if ($res==0){//判断商户分类中是否存在商户,不存在就删除
+            $shop_category->delete();
+            session()->flash('success','删除成功');
+            return redirect("shop_categories");
+        }else{
+            session()->flash('warning','该分类下面存在商户,不能被删除!');
+            return redirect("shop_categories");
+        }
     }
 
 

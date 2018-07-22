@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shop_categories;
 use App\Models\Shops;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ShopsController extends Controller
@@ -57,13 +58,13 @@ class ShopsController extends Controller
 
         ]);
         //处理图片
-        $shop_img = $request->shop_img;
-        $shop_img_name = $shop_img->store('public/shop_img');
-        $img  = Storage::url($shop_img_name);
-        $true_path = url($img);
+        //$shop_img = $request->shop_img;
+        //$shop_img_name = $shop_img->store('public/shop_img');
+        //$img  = Storage::url($shop_img_name);
+        //$true_path = url($img);
         Shops::create(['shop_category_id'=> $request->shop_category_id,
             'shop_name'=>$request->shop_name,
-            'shop_img'=>$true_path,
+            'shop_img'=>$request->shop_img,
             'shop_rating'=>$request->shop_rating,
             'brand'=>$request->brand,
             'on_time'=>$request->on_time,
@@ -143,14 +144,14 @@ class ShopsController extends Controller
             session()->flash('success','修改成功');
             return redirect('shops');
         }else{
-            $shop_img_name = $shop_img->store('public/shop_img');
-            $img  = Storage::url($shop_img_name);
-            $true_path = url($img);
+            //$shop_img_name = $shop_img->store('public/shop_img');
+            //img  = Storage::url($shop_img_name);
+            //$true_path = url($img);
             //修改成功后保存
             $shop->update([
                 'shop_category_id'=> $request->shop_category_id,
                 'shop_name'=>$request->shop_name,
-                'shop_img'=>$true_path,
+                'shop_img'=>$shop_img,
                 'shop_rating'=>$request->shop_rating,
                 'brand'=>$request->brand,
                 'on_time'=>$request->on_time,
@@ -171,9 +172,17 @@ class ShopsController extends Controller
 
     }
     public function destroy(Shops $shop){
-        $shop->delete();
-        session()->flash('success','删除成功');
-        return redirect("shops");
+        $id = $shop->id;
+        $res = DB::table('shop_users')->where('shop_id',$id)->count();//判断商户下面是否还存在商家
+//        $res = DB::select("select COUNT(*) from shop_users WHERE shop_id=?",[$id]);
+        if ($res==0){
+            $shop->delete();
+            session()->flash('success','删除成功');
+            return redirect("shops");
+        }else{
+            session()->flash('danger','该商户下面还存在商家,不能被删除!');
+            return redirect("shops");
+        }
     }
 
 }
