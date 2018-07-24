@@ -54,5 +54,5 @@
             </tr>
         @endforeach
     </table>
-    {{ $activies->links() }}
+    {{ $activies->appends($keywords)->links() }}
 @stop

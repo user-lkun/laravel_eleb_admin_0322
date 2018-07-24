@@ -9,19 +9,24 @@ class ActiviesController extends Controller
 {
     public function index(Request $request){
 
-        if ($request->status==null){
-            $activies = Activies::paginate();
-        }elseif($request->status=='end'){
-            $activies = Activies::where('end_time','<',time())->paginate();
-        }elseif ($request->status=='ing'){
-            $activies = Activies::where('end_time','>',time())
-                        ->where('start_time','<',time())
-                        ->paginate();
-        }elseif ($request->status=='not_start'){
-            $activies = Activies::where('start_time','>',time())->paginate();
+        $wheres = [];
+        $keywords = [];
+        if ($request->status=='end'){
+            $wheres[]=['end_time','<',time()];
+            $keywords['status']='end';
+        }
+        if($request->status=='ing'){
+            $wheres[]=['end_time','>',time()];
+            $wheres[]=['start_time','<',time()];
+            $keywords['status']='ing';
+        }
+        if ($request->status=='not_start'){
+            $wheres[]=['start_time','>',time()];
+            $keywords['status']='not_start';
         }
 
-        return view('activies/index',compact('activies'));
+        $activies = Activies::where($wheres)->paginate(2);
+        return view('activies/index',compact('activies','keywords'));
     }
     public function create(){
         return view('activies/create');
