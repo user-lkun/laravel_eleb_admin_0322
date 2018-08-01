@@ -36,6 +36,20 @@
                 <input type="text" class="form-control" id="inputCategroy" name="email" placeholder="管理员邮箱" value="{{$admin->email }}">
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="inputCategroy" class="col-sm-3 control-label">给管理员添加角色:</label>
+            <div class="col-sm-9">
+                @foreach($roles as $val)
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="role_ids[]" id="inlineCheckbox1" value="{{$val->id}}"
+                                {{$myroles->contains($val)?'checked':''}}
+                        >{{$val->name}}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-3 control-label">验证码:</label>
             <label for="inputPassword3" class="col-sm-2 control-label">

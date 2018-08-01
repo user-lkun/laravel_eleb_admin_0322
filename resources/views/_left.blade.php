@@ -62,6 +62,58 @@
 
             <div class="btn-group" role="group">
                 <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    订单管理
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
+                    <li><a href="{{route('orders.index')}}">订单统计</a></li>
+                    {{--<li><a href="#">Dropdown link</a></li>--}}
+                </ul>
+            </div>
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    菜品管理
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
+                    <li><a href="{{route('menus.index')}}">菜品统计</a></li>
+                    {{--<li><a href="#">Dropdown link</a></li>--}}
+                </ul>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    会员管理
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
+                    <li><a href="{{route('members.index')}}">会员列表</a></li>
+                    {{--<li><a href="#">Dropdown link</a></li>--}}
+                </ul>
+            </div>
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    权限管理
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
+                    <li><a href="{{route('rbacs.index')}}">权限列表</a></li>
+                    <li><a href="{{route('rbacs.create')}}">添加权限</a></li>
+                </ul>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    角色管理
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop3">
+                    <li><a href="{{route('roles.index')}}">角色列表</a></li>
+                    <li><a href="{{route('roles.create')}}">添加角色</a></li>
+                </ul>
+            </div>
+            <div class="btn-group" role="group">
+                <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ------管理
                     <span class="caret"></span>
                 </button>

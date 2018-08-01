@@ -30,6 +30,16 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="inputCategroy" class="col-sm-3 control-label">给管理员添加角色:</label>
+            <div class="col-sm-9">
+                @foreach($roles as $val)
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="role_ids[]" id="inlineCheckbox1" value="{{$val->id}}">{{$val->name}}
+                    </label>
+                @endforeach
+            </div>
+        </div>
+        <div class="form-group">
             <label for="inputPassword3" class="col-sm-3 control-label">验证码:</label>
             <label for="inputPassword3" class="col-sm-2 control-label">
                 <input id="captcha" class="form-control" name="captcha" >

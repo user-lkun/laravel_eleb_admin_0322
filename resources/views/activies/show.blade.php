@@ -3,7 +3,7 @@
 @section('content')
     <h3>--查看活动--</h3>
 
-    <form action=" }}" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 50%;margin: 50px auto">
+    <form action=" " method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 50%;margin: 50px auto">
         <div class="form-group">
             <label for="inputCategroy" class="col-sm-3 control-label">活动名称:</label>
             <div class="col-sm-9">

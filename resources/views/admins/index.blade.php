@@ -15,17 +15,21 @@
                 <td>{{$val->name}}</td>
                 <td>{{ $val->email }}</td>
                 <td>
-                    &emsp;
+                    &emsp;&emsp;
+                    <a href="{{route('admins.show',[$val])}}" title="查看" class="btn btn-success">
+
+                        所属角色
+                    </a>
+                    &emsp;@can('修改管理员')
                     {{--<a href="" title="修改" class="btn ">--}}
                     <a href="{{route('admins.edit',[$val])}}" title="修改" class="btn ">
 
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
-
-
+                        @endcan
                     {{--<span class="glyphicon  glyphicon-plus"></span>--}}
                     {{--</a>--}}
-
+                    @can('删除管理员')
                     <span style="float: left">
                    <form action="{{ route('admins.destroy',[$val]) }}" method="post" >
                     {{method_field('DELETE')}}
@@ -33,7 +37,7 @@
                        <button title="删除"><span class="glyphicon glyphicon-trash"></span></button>
                 </form>
                 </span>
-
+                    @endcan
                 </td>
             </tr>
         @endforeach

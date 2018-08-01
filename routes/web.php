@@ -14,6 +14,7 @@
 //Route::get('/', function () {
 //    return view('login/login');
 //});
+
 Route::get('/','SessionsController@login');
 
 Route::resource('shop_categories','Shop_categoriesController');
@@ -45,5 +46,18 @@ Route::post('upload',function (){
         'fileName'=>$storage->url($fileName)
     ];
 })->name('upload');
+//订单统计
+Route::get('/orders','OrdersController@index')->name('orders.index');
 
+//菜品统计
+Route::get('/menus','MenusController@index')->name('menus.index');
+//会员管理
+Route::get('/members','MembersController@index')->name('members.index');
+Route::get('/members/{member}/edit','MembersController@edit')->name('members.edit');
+Route::get('/members/{member}','MembersController@show')->name('members.show');
+
+//权限管理
+Route::resource('rbacs','RbacsController');
+//角色管理
+Route::resource('roles','RolesController');
 
