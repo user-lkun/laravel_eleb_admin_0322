@@ -78,6 +78,9 @@ class AdminsController extends Controller
     }
 
     public function edit(Admins $admin){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $roles = Role::all();
         $myroles = $admin->roles;
         return view('admins/edit',compact('admin','roles','myroles'));
@@ -87,6 +90,9 @@ class AdminsController extends Controller
         return view('admins/show',compact('admin','myroles'));
     }
     public function update( Request $request,Admins $admin){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $old_email = $request->email;//原邮箱可以不填,就不用更新邮箱
         $this->validate($request, [
             'name' => 'required|max:10',
@@ -138,6 +144,9 @@ class AdminsController extends Controller
     }
 
     public function destroy(Admins $admin){
+        if (!Auth::user()->can('删除')){
+            return view('public');
+        }
         $admin->delete();
         session()->flash('success','删除成功');
         return redirect("admins");

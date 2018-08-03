@@ -26,7 +26,7 @@
                 <td>{{ date('Y-m-d　H:i:s',$val->start_time) }}</td>
                 <td>{{ date('Y-m-d　H:i:s',$val->end_time) }}</td>
                 <td>
-                    &emsp;
+
                     {{--<a href="" title="修改" class="btn ">--}}
                     <a href="{{route('activies.edit',[$val])}}" title="修改" class="btn ">
 
@@ -43,11 +43,13 @@
                     {{--</a>--}}
 
                     <span style="float: left">
+
                    <form action="{{ route('activies.destroy',[$val]) }}" method="post" >
                     {{method_field('DELETE')}}
                        {{csrf_field()}}
                        <button title="删除"><span class="glyphicon glyphicon-trash"></span></button>
                 </form>
+
                 </span>
 
                 </td>

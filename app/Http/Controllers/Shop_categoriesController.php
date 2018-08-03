@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop_categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Shop_categoriesController extends Controller
@@ -43,10 +44,16 @@ class Shop_categoriesController extends Controller
         return redirect('shop_categories');
     }
     public function edit(Shop_categories $shop_category){//回显
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         return view('shop_categories/edit',compact('shop_category'));
     }
 
     public function update(Shop_categories $shop_category,Request $request){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $this->validate($request,[
             'name'=>'required|max:10',
 
@@ -79,7 +86,9 @@ class Shop_categoriesController extends Controller
     }
     //删除
     public function destroy(Shop_categories $shop_category){
-
+        if (!Auth::user()->can('删除')){
+            return view('public');
+        }
         $id = $shop_category->id;
         $res = DB::table('shops')->where('shop_category_id',$id)->count();
 //        $res = DB::select("select title from articles WHERE cate_id='{$id}'");

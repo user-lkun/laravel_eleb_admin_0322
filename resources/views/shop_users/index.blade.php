@@ -19,7 +19,7 @@
                 <td>{{$val->shops->shop_name}}</td>
 
                 <td>{{ $val->email }}</td>
-                <td>{{$val->status==1?'显示':'隐藏'}}</td>
+                <td>{{$val->status==1?'正常':'禁用'}}</td>
 
                 <td>
                     &emsp;
@@ -32,7 +32,12 @@
 
                         <span class="btn btn-link">重置密码</span>
                     </a>
+                    @if($val->status==1)
+                    <a href="{{route('shopusers.email',[$val])}}" title="审核" class="btn ">
 
+                        <span class="btn btn-success">审核通过通知</span>
+                    </a>
+                    @endif
                     <span style="float: left">
                    <form action="{{ route('shopusers.destroy',[$val]) }}" method="post" >
                     {{method_field('DELETE')}}

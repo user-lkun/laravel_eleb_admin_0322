@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Shops;
 use App\Models\ShopUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ShopUsersController extends Controller
 {
@@ -70,12 +72,16 @@ class ShopUsersController extends Controller
         return redirect("shopusers");
     }
     public function edit(ShopUsers $shopuser){
-
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $shops = Shops::all();
         return view('shop_users/edit',compact('shopuser','shops'));
     }
     public function update(Request $request,ShopUsers $shopuser){
-
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $old_email = $request->email;//原邮箱可以不填,就不用更新邮箱
         $this->validate($request, [
             'name' => 'required|max:10',
@@ -129,6 +135,9 @@ class ShopUsersController extends Controller
         return redirect('shopusers');
     }
     public function destroy(ShopUsers $shopuser){
+        if (!Auth::user()->can('删除')){
+            return view('public');
+        }
         $shopuser->delete();
         session()->flash('success','删除成功');
         return redirect("shopusers");
@@ -140,6 +149,21 @@ class ShopUsersController extends Controller
         $res = DB::update("update shop_users set password = '{$password}' where id = ?", [$id]);
 //        dd($res);
         session()->flash('success','重置成功');
+        return redirect("shopusers");
+    }
+
+//发送邮件通知
+    public function email(ShopUsers $shopuser){
+//        $_SERVER['email']=$shopuser->email;//获取商家邮箱
+        $shopuser = $shopuser->name;
+        $res = Mail::raw("大兄弟:".$shopuser.",你好!审核已通过,请登录查看!",function ($message){//发内容
+            $message->subject('商家审核通知');
+//            $message->to($_SERVER['email']);
+            $message->to('liao1026860145@163.com');
+            $message->from('liao1026860145@163.com','liao1026860145');
+
+        });
+        session()->flash('success','发送邮件成功');
         return redirect("shopusers");
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ActiviesController extends Controller
 {
@@ -13,6 +14,7 @@ class ActiviesController extends Controller
 
         ]);
     }
+
     public function index(Request $request){
 
         $wheres = [];
@@ -75,10 +77,16 @@ class ActiviesController extends Controller
     }
 
     public function edit(Activies $activy){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
 //        dd(date('Y-m-d H:i:s',$activy->start_time));
         return view('activies/edit',compact('activy'));
     }
     public function update(Request $request,Activies $activy){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $this->validate($request, [
             'title' => 'required|max:20',
             'start_time' => 'required',
@@ -116,6 +124,9 @@ class ActiviesController extends Controller
         return redirect("activies");
     }
     public function destroy(Activies $activy){
+        if (!Auth::user()->can('删除')){
+            return view('public');
+        }
         $activy->delete();
         session()->flash('success','删除成功');
         return redirect("activies");

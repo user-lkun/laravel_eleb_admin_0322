@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shop_categories;
 use App\Models\Shops;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -85,11 +86,17 @@ class ShopsController extends Controller
         return redirect("shops");
     }
     public function edit(Shops $shop){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $shop_categories = Shop_categories::all();
          return view('shops/edit',compact('shop','shop_categories'));
     }
 
     public function update(Shops $shop,Request $request){
+        if (!Auth::user()->can('修改')){
+            return view('public');
+        }
         $this->validate($request, [
             'shop_category_id' => 'required',
             'shop_name' => 'required',
@@ -172,6 +179,9 @@ class ShopsController extends Controller
 
     }
     public function destroy(Shops $shop){
+        if (!Auth::user()->can('删除')){
+            return view('public');
+        }
         $id = $shop->id;
         $res = DB::table('shop_users')->where('shop_id',$id)->count();//判断商户下面是否还存在商家
 //        $res = DB::select("select COUNT(*) from shop_users WHERE shop_id=?",[$id]);
