@@ -10,6 +10,12 @@ use Spatie\Permission\Models\Permission;
 class NavsController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth',[
+
+        ]);
+    }
     public function index(){
 
         $navs = Navs::paginate(10);
