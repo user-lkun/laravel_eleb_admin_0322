@@ -19,7 +19,7 @@ class EventPrizes extends Model
         return $this->hasOne(Events::class,'id','events_id');
     }
     //建立奖品表和商家表的关系 一对一
-    public function shops(){
-        return $this->hasOne(Shops::class,'id','shop_id');
+    public function shopusers(){
+        return $this->hasOne(ShopUsers::class,'id','shop_id');
     }
 }

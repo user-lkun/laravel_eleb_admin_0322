@@ -7,7 +7,7 @@
         <div class="form-group">
             <label for="inputCategroy" class="col-sm-3 control-label">活动名称:</label>
             <div  class="col-sm-9 ">
-                <input type="text" name="events_id" value="{{$events->title}}"disabled>
+                <input type="hidden" name="events_id" value="{{$events->id}}">{{$events->title}}
             </div>
 
 

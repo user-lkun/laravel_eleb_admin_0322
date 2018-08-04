@@ -23,6 +23,7 @@ class EventPrizesController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required|max:10',
             'description' => 'required',

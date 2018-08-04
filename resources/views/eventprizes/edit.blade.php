@@ -9,7 +9,7 @@
             <div  class="col-sm-9 ">
                 <select name="events_id" id="">
                     @foreach($events as $val)
-                        <option value="{{$val->id}}" {{$eventprize->shop_id==$val->id?'selected':''}}>{{$val->title}}</option>
+                        <option value="{{$val->id}}" {{$eventprize->events_id==$val->id?'selected':''}}>{{$val->title}}</option>
                     @endforeach
                 </select>
             </div>
@@ -39,15 +39,6 @@
                 <script id="container" name="description" type="text/plain">{!! $eventprize->description !!}</script>
             </div>
         </div>
-        @if($eventprize->events->is_prize==1)
-        <div class="form-group">
-            <label for="inputCategroy" class="col-sm-3 control-label">中奖商家:</label>
-            <div class="col-sm-9">
-                {{--<input type="text" class="form-control" id="inputCategroy" name="shop_id" placeholder="中奖商家" value="1" disabled>--}}
-                <input type="text" name="shop_id" value="0" >
-            </div>
-        </div>
-        @endif
         {{csrf_field()}}
         {{method_field('PATCH')}}
         <div class="form-group">

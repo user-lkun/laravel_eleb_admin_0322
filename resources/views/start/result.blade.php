@@ -11,7 +11,7 @@
         @foreach(\App\Models\EventPrizes::where('events_id',$event->id)->get() as $val)
 
             <tr>
-                <td>{{$val->shops->shop_name}}</td>
+                <td>{{$val->shopusers['name']}}</td>
                 <td>{{$val->name}}</td>
                 <td>{!! $val->description !!}</td>
             </tr>

@@ -17,7 +17,7 @@
                 <td>{{$val->events->title}}</td>
                 <td>{{$val->name}}</td>
                 <td>{!! $val->description !!}</td>
-                <td>{{$val->shop_id==0?'未知':$val->shops->shop_name}}</td>
+                <td>{{$val->shop_id==0?'未知':$val->shopusers['name']}}</td>
                 <td>
 
                     <a href="{{route('eventprizes.edit',[$val])}}" title="修改" class="btn ">
