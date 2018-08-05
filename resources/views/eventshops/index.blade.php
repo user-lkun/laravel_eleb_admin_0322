@@ -22,7 +22,7 @@
         @foreach($list as $val)
             <tr>
                 <td>{{$val->id}}</td>
-                <td>{{$val->events->title}}</td>
+                <td>{{$val->events['title']}}</td>
                 <td>{{$val->shopusers['name']}}</td>
 
             </tr>

@@ -30,6 +30,7 @@ class StartController extends Controller
             $shops_id[]=$val->shop_id;
         }
         $res = [];
+
         if(count($prizes)>count($shops_id)){//判断商家跟奖品的个数
                     for ($i=0;$i<count($shops_id);++$i){
                         shuffle($prizes);

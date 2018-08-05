@@ -14,7 +14,7 @@
         @foreach($eventprizes as $val)
             <tr>
                 <td>{{$val->id}}</td>
-                <td>{{$val->events->title}}</td>
+                <td>{{$val->events['title']}}</td>
                 <td>{{$val->name}}</td>
                 <td>{!! $val->description !!}</td>
                 <td>{{$val->shop_id==0?'未知':$val->shopusers['name']}}</td>
